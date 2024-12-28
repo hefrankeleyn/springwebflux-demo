@@ -22,9 +22,9 @@ public class DemoController {
      * @return
      */
     @GetMapping(value = "/matrixParams01/{carId}")
-    public String matrixParams01(@MatrixVariable(pathVar = "carId", name = "color") String color,
+    public String matrixParams01(@PathVariable("carId") String carId, @MatrixVariable(pathVar = "carId", name = "color") String color,
                                @MatrixVariable(pathVar = "carId", name = "year") Integer year){
-        return Strings.lenientFormat("Matrix Params: color: %s, year: %s", color, year);
+        return Strings.lenientFormat("path: [%s] Matrix Params: color: %s, year: %s", carId, color, year);
     }
 
     /**
@@ -34,9 +34,10 @@ public class DemoController {
      * @return
      */
     @GetMapping(value = "/matrixParams02/{carId}")
-    public String matrixParams02(@MatrixVariable(pathVar = "carId", name = "colors") List<String> colors,
+    public String matrixParams02(@PathVariable(value = "carId") String carId,
+                                 @MatrixVariable(pathVar = "carId", name = "colors") List<String> colors,
                                  @MatrixVariable(pathVar = "carId", name = "year") Integer year){
-        return Strings.lenientFormat("Matrix Params: colors: %s, year: %s", colors, year);
+        return Strings.lenientFormat("path: [%s], Matrix Params: colors: %s, year: %s", carId, colors, year);
     }
 
     /**
@@ -45,8 +46,9 @@ public class DemoController {
      * @return
      */
     @GetMapping(value = "/matrixParams03/{carId}/{userId}")
-    public String matrixParams03(@MatrixVariable(pathVar = "carId") MultiValueMap<String, String> values){
-        return Strings.lenientFormat("Matrix Params all values:  %s", values);
+    public String matrixParams03(@PathVariable("carId") String carId,
+            @MatrixVariable(pathVar = "carId") MultiValueMap<String, String> values){
+        return Strings.lenientFormat("path:[%s], Matrix Params all values:  %s", carId, values);
     }
 
     /**
@@ -55,10 +57,11 @@ public class DemoController {
      * @return
      */
     @GetMapping(value = "/matrixParams04/{carId}/{userId}")
-    public String matrixParams04(@MatrixVariable MultiValueMap<String, String> values){
-        return Strings.lenientFormat("ALL Path. Matrix Params all values:  %s", values);
+    public String matrixParams04(@PathVariable("carId") String carId,
+                                 @PathVariable("userId") String userId,
+                                 @MatrixVariable MultiValueMap<String, String> values){
+        return Strings.lenientFormat("path:[%s] and [%s]. Matrix Params all values:  %s", carId, userId, values);
     }
-
 
     @RequestMapping(value = "/sayHello", method = RequestMethod.GET)
     public String sayHello(@RequestParam("name") String name) {
