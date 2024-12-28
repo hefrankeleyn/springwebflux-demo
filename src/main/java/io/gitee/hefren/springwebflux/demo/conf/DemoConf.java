@@ -24,7 +24,7 @@ public class DemoConf {
     @Bean
     public RouterFunction<ServerResponse> routerFunction() {
         return RouterFunctions.route()
-                .GET("/demoController/sayHello", RequestPredicates.accept(MediaType.APPLICATION_JSON),
+                .GET("/demoFuncController/sayHello", RequestPredicates.accept(MediaType.APPLICATION_JSON),
                         (ServerRequest request)->ServerResponse.ok().body(Mono.just("RouterFunction say Hello: " + request.queryParam("name").get()), String.class))
                 .build();
     }
@@ -34,11 +34,11 @@ public class DemoConf {
         return args->{// 
             SimpleUrlHandlerMapping simpleUrlHandlerMapping = applicationContext.getBean("resourceHandlerMapping", SimpleUrlHandlerMapping.class);
             Map<String, WebHandler> urlMap = new HashMap<>();
-            urlMap.put("/demoController/sayHello", (ServerWebExchange exchange) -> {
+            urlMap.put("/demoFuncController/sayHello", (ServerWebExchange exchange) -> {
                 String data = "SimpleUrlHanlderMapping say Hello: " + exchange.getRequest().getQueryParams().get("name");
                 return exchange.getResponse().writeWith(Mono.just(exchange.getResponse().bufferFactory().wrap(data.getBytes())));
             });
-            urlMap.put("/demoController/saySimpleHello", (ServerWebExchange exchange) -> {
+            urlMap.put("/demoFuncController/saySimpleHello", (ServerWebExchange exchange) -> {
                 String data = "SimpleUrlHanlderMapping say Hello: " + exchange.getRequest().getQueryParams().get("name");
                 return exchange.getResponse().writeWith(Mono.just(exchange.getResponse().bufferFactory().wrap(data.getBytes())));
             });
@@ -52,11 +52,11 @@ public class DemoConf {
 //    public SimpleUrlHandlerMapping simpleUrlHandlerMapping() {
 //       SimpleUrlHandlerMapping simpleUrlHandlerMapping = new SimpleUrlHandlerMapping();
 //       Map<String, WebHandler> urlMap = new HashMap<>();
-//       urlMap.put("/demoController/sayHello", (ServerWebExchange exchange)->{
+//       urlMap.put("/demoFuncController/sayHello", (ServerWebExchange exchange)->{
 //           String data = "SimpleUrlHanlderMapping say Hello: " + exchange.getRequest().getQueryParams().get("name");
 //           return exchange.getResponse().writeWith(Mono.just(exchange.getResponse().bufferFactory().wrap(data.getBytes())));
 //       });
-//        urlMap.put("/demoController/saySimpleHello", (ServerWebExchange exchange)->{
+//        urlMap.put("/demoFuncController/saySimpleHello", (ServerWebExchange exchange)->{
 //            String data = "SimpleUrlHanlderMapping say Hello: " + exchange.getRequest().getQueryParams().get("name");
 //            return exchange.getResponse().writeWith(Mono.just(exchange.getResponse().bufferFactory().wrap(data.getBytes())));
 //        });

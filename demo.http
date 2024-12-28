@@ -19,23 +19,27 @@ GET http://localhost:8080/demoController/matrixParams04/cars;colors=red;colors=g
 Accept: application/json
 
 
-### sayHello
-GET http://localhost:8080/demoController/sayHello?name=lifei
+### 查询参数01
+GET http://localhost:8080/demoController/requestParam01?name=Peter
 Accept: application/json
 
-### saySimpleHello
-GET http://localhost:8080/demoController/saySimpleHello?name=lifei
+### 查询参数02: 查询参数，默认必须传，如果缺少就会报错
+GET http://localhost:8080/demoController/requestParam01
 Accept: application/json
 
-### sayHello-HEAD
-HEAD http://localhost:8080/demoController/sayHello?name=lifei
+### 查询参数03: 设置required=false
+GET http://localhost:8080/demoController/requestParam02
 Accept: application/json
 
-### sayHello-OPTIONS
-OPTIONS http://localhost:8080/demoController/sayHello?name=lifei
+### 查询参数04: 使用Optional 修改参数值
+GET http://localhost:8080/demoController/requestParam03
 Accept: application/json
 
-
-### matchPath
-GET http://localhost:8080/demoController/match/1/path
+### 查询参数05: 和map结合
+GET http://localhost:8080/demoController/requestParam04?name=Peter&age=21
 Accept: application/json
+
+### 查询参数06: 和MultiValueMap结合
+GET http://localhost:8080/demoController/requestParam05?name=Peter&name=Jone&age=22
+Accept: application/json
+

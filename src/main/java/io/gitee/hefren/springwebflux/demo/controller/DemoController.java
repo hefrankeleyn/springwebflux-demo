@@ -6,6 +6,8 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * @Date 2024/9/29
@@ -63,13 +65,54 @@ public class DemoController {
         return Strings.lenientFormat("path:[%s] and [%s]. Matrix Params all values:  %s", carId, userId, values);
     }
 
-    @RequestMapping(value = "/sayHello", method = RequestMethod.GET)
-    public String sayHello(@RequestParam("name") String name) {
-        return "RequestMapping say Hello " + name;
+    /**
+     * 查询参数示例01: 默认是必须的，否则会报错
+     * @param name
+     * @return
+     */
+    @GetMapping(value = "/requestParam01")
+    public String requestParam01(@RequestParam("name") String name) {
+        return Strings.lenientFormat("Request param, name: %s", name);
     }
 
-    @GetMapping(value = "/match/{name}/path", consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public String matchPath(@PathVariable("name") String name) {
-        return name;
+    /**
+     * 查询参数示例02: 使用required改变可选的方式
+     * @param name
+     * @return
+     */
+    @GetMapping(value = "/requestParam02")
+    public String requestParam02(@RequestParam(value = "name", required = false) String name) {
+        return Strings.lenientFormat("Request param, name: %s", name);
     }
+
+    /**
+     * 查询参数示例03： 使用 Optional 修改参数，改变参数可选方式
+     * @param name
+     * @return
+     */
+    @GetMapping(value = "/requestParam03")
+    public String requestParam03(@RequestParam(value = "name") Optional<String> name) {
+        return Strings.lenientFormat("Request param, name: %s", name);
+    }
+
+    /**
+     * 查询参数示例03: 和Map结合
+     * @param map
+     * @return
+     */
+    @GetMapping(value = "/requestParam04")
+    public String requestParam04(@RequestParam Map<String, String> map) {
+        return Strings.lenientFormat("Request param:  %s", map);
+    }
+
+    /**
+     * 查询参数示例04: 和MultiValueMap结合
+     * @param map
+     * @return
+     */
+    @GetMapping(value = "/requestParam05")
+    public String requestParam05(@RequestParam MultiValueMap<String, String> map) {
+        return Strings.lenientFormat("Request param:  %s", map);
+    }
+
 }
