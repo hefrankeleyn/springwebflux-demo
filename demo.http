@@ -1,0 +1,41 @@
+### 矩阵变量-01
+GET http://localhost:8080/demoController/matrixParams01/cars;color=red;year=2024
+Accept: application/json
+
+### 矩阵变量-02: 逗号分隔指定多个值
+GET http://localhost:8080/demoController/matrixParams02/cars;colors=red,green,yellow;year=2022
+Accept: application/json
+
+### 矩阵变量-03: 重复变量名，指定多个值
+GET http://localhost:8080/demoController/matrixParams02/cars;colors=red;colors=green;colors=yellow;year=2021
+Accept: application/json
+
+### 矩阵变量-04: 接收某一个路径段中的所有变量值
+GET http://localhost:8080/demoController/matrixParams03/cars;colors=red;colors=green;colors=yellow;year=2025/users;name=Peter;arg=23
+Accept: application/json
+
+### 矩阵变量-05: 接收所有路径段中所有的值
+GET http://localhost:8080/demoController/matrixParams04/cars;colors=red;colors=green;colors=yellow;year=2025/users;name=Peter;arg=23
+Accept: application/json
+
+
+### sayHello
+GET http://localhost:8080/demoController/sayHello?name=lifei
+Accept: application/json
+
+### saySimpleHello
+GET http://localhost:8080/demoController/saySimpleHello?name=lifei
+Accept: application/json
+
+### sayHello-HEAD
+HEAD http://localhost:8080/demoController/sayHello?name=lifei
+Accept: application/json
+
+### sayHello-OPTIONS
+OPTIONS http://localhost:8080/demoController/sayHello?name=lifei
+Accept: application/json
+
+
+### matchPath
+GET http://localhost:8080/demoController/match/1/path
+Accept: application/json
