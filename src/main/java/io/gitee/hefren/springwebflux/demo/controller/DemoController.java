@@ -1,7 +1,6 @@
 package io.gitee.hefren.springwebflux.demo.controller;
 
 import com.google.common.base.Strings;
-import org.springframework.http.MediaType;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
@@ -81,7 +80,7 @@ public class DemoController {
      * @return
      */
     @GetMapping(value = "/requestParam02")
-    public String requestParam02(@RequestParam(value = "name", required = false) String name) {
+    public String requestParam02(@RequestParam(value = "name", required = false, defaultValue = "default-value-null") String name) {
         return Strings.lenientFormat("Request param, name: %s", name);
     }
 
